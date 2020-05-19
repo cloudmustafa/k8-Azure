@@ -1,0 +1,41 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: simpleapi
+  namespace: slb
+spec:
+  selector:
+    matchLabels:
+      app: simpleapi
+  replicas: 1 # tells deployment to run 1 pod matching the template
+  template:
+    metadata:
+      labels:
+        app: simpleapi
+    spec:
+      containers:
+      - name: simpleapi
+        image: sogetislbdemo.azurecr.io/simpleapi:v1 # #{ImageTag}# #v10 #v2.#{Build.BuildId}#
+        ports:
+        - containerPort: 6002
+        resources:
+          limits:
+            cpu: "1"
+            memory: "200Mi"
+          requests:
+            cpu: "0.1"
+            memory: "100Mi"
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: simpleapi
+  namespace: slb
+spec:
+  selector:
+    app: simpleapi
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 6002
+  type: LoadBalancer

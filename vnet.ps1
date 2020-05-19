@@ -1,0 +1,1 @@
+az network vnet create --resource-group slbrg --name slb-vnet --address-prefixes 10.0.0.0/8  --subnet-name slb-subnet --subnet-prefix 10.245.0.0/16

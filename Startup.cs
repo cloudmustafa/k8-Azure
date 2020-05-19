@@ -48,7 +48,7 @@ namespace CQRSMediatR
                 {
                     Title = "CQRS with MediatR - Simple API",
                         Version = "v1",
-                        Description = "Simple API built to demonstrate how to use CQRS with MediatR with REST Micro Services.",
+                        Description = "Simple API to demonstrate CQRS & MediatR pattern with REST Micro Service.",
                         Contact = new Contact
                         {
                             Name = "Cloud Mustafa - Sogeti",

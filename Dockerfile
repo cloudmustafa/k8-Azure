@@ -5,16 +5,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY CQRSMediatR.csproj ./
-RUN dotnet restore "./CQRSMediatR.csproj"
+COPY SimpleAPI.csproj ./
+RUN dotnet restore "./SimpleAPI.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "CQRSMediatR.csproj" -c Release -o /app/build
+RUN dotnet build "SimpleAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "CQRSMediatR.csproj" -c Release -o /app/publish
+RUN dotnet publish "SimpleAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CQRSMediatR.dll"]
+ENTRYPOINT ["dotnet", "SimpleAPI.dll"]
